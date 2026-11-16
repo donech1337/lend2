@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucky Clover Game</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@600&display=swap">
+<style>
+:root{--bg1:#0f5a34;--bg2:#052e1a;--gold1:#fff0a8;--gold2:#f5c030;--gold3:#a86f08;--leaf:#2fb463;--text:#fff7d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;height:100%;min-height:100vh;overflow:hidden;background:radial-gradient(ellipse at center,var(--bg1) 0%,var(--bg2) 75%);color:var(--text);font-family:"Nunito",system-ui,sans-serif;display:grid;place-items:center}
+main{position:relative;z-index:2;text-align:center;padding:24px;max-width:640px}
+h1{font-family:"Cinzel",Georgia,serif;font-weight:900;font-size:clamp(2.4rem,9vw,4.6rem);line-height:1.05;margin:0 0 14px;background:linear-gradient(180deg,var(--gold1),var(--gold2) 55%,var(--gold3));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+p{font-size:clamp(1rem,3.5vw,1.25rem);margin:0 0 10px;opacity:.9}
+.hand{font-size:clamp(2.4rem,8vw,3.4rem);line-height:1;margin-bottom:8px;animation:point 1.2s ease-in-out infinite}
+@keyframes point{50%{transform:translateY(8px)}}
+.btn{display:inline-block;font-family:"Cinzel",Georgia,serif;font-weight:900;font-size:clamp(1.1rem,4vw,1.5rem);color:#3a2400;text-decoration:none;padding:18px 44px;border-radius:999px;background:linear-gradient(180deg,var(--gold1),var(--gold2) 60%,#e0a010);box-shadow:0 6px 0 var(--gold3),0 14px 30px rgba(0,0,0,.45);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 var(--gold3),0 18px 34px rgba(0,0,0,.5)}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--gold3),0 6px 14px rgba(0,0,0,.4)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.deco{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.clover{position:absolute;fill:var(--leaf);opacity:.55;transform:rotate(var(--r))}
+.coin{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,var(--gold1),var(--gold2) 50%,var(--gold3));box-shadow:inset 0 0 0 4px rgba(168,111,8,.55),inset 0 0 0 7px rgba(255,240,168,.5),0 8px 16px rgba(0,0,0,.4);display:grid;place-items:center;animation:bob 5s ease-in-out infinite;animation-delay:var(--d)}
+.coin svg{width:46%;fill:#a86f08;opacity:.85}
+@keyframes bob{50%{transform:translateY(-14px) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.coin,.hand{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="cl" viewBox="-14 -14 28 40">
+<g id="lf"><path d="M0 0C-6-3-9-9-5-12C-2-14 0-11 0-9C0-11 2-14 5-12C9-9 6-3 0 0Z"/></g>
+<use href="#lf" transform="rotate(90)"/><use href="#lf" transform="rotate(180)"/><use href="#lf" transform="rotate(270)"/>
+<path d="M0 1C1 8 4 12 8 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+</symbol>
+</svg>
+
+<div class="deco" id="deco" aria-hidden="true"></div>
+
+<main>
+  <h1>Play Now</h1>
+  <p>Collect golden coins and find the four-leaf clover. Luck is waiting for you.</p>
+  <div class="hand" aria-hidden="true">👇</div>
+  <a class="btn" href="https://r1wagwk.com/?open=register&amp;p=1mqt3">Go to the game</a>
+</main>
+
+<script>
+(function(){
+  var d=document.getElementById('deco'),h='';
+  var clovers=[[4,6,90,-15],[80,4,70,20],[10,70,110,30],[84,66,100,-25],[44,86,60,10],[40,2,54,40],[92,34,56,-10],[2,38,50,25]];
+  var coins=[[14,18,64,0],[72,14,52,-1.2],[6,52,48,-2],[88,50,70,-.6],[22,82,56,-1.8],[70,80,62,-2.6],[50,10,40,-3.2],[34,64,34,-.9]];
+  clovers.forEach(function(c){h+='<svg class="clover" style="left:'+c[0]+'%;top:'+c[1]+'%;width:'+c[2]+'px;height:'+(c[2]*1.4)+'px;--r:'+c[3]+'deg;color:#2fb463"><use href="#cl"/></svg>'});
+  coins.forEach(function(c){h+='<div class="coin" style="left:'+c[0]+'%;top:'+c[1]+'%;width:'+c[2]+'px;height:'+c[2]+'px;--d:'+c[3]+'s"><svg viewBox="-14 -14 28 40"><use href="#cl"/></svg></div>'});
+  d.innerHTML=h;
+})();
+</script>
+</body>
+</html>
